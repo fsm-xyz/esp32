@@ -23,7 +23,13 @@ void runUsrCmd()
 void Core0task(void *pvParameters)
 {
     // Task 1 code here
-
+    Serial.begin(115200);
+    Serial.println(F("++++++++++++++++++++++++++++++++++"));
+    Serial.println(F("+ Taichi-Maker AccelStepper Demo +"));
+    Serial.println(F("+     www.taichi-maker.com       +"));
+    Serial.println(F("++++++++++++++++++++++++++++++++++"));
+    Serial.println(F(""));
+    Serial.println(F("Please input motor command:"));
     for (;;)
     {
         if (Serial.available())
@@ -49,14 +55,6 @@ void Core0task(void *pvParameters)
 
 void setup()
 {
-    Serial.begin(115200);
-    Serial.println(F("++++++++++++++++++++++++++++++++++"));
-    Serial.println(F("+ Taichi-Maker AccelStepper Demo +"));
-    Serial.println(F("+     www.taichi-maker.com       +"));
-    Serial.println(F("++++++++++++++++++++++++++++++++++"));
-    Serial.println(F(""));
-    Serial.println(F("Please input motor command:"));
-
     xTaskCreatePinnedToCore(Core0task, "Core0task", 4096, NULL, 3, &th_p[0], 0);
     // 1000000.0 166599
     stepper1.setMaxSpeed(1000000);
